@@ -30,6 +30,7 @@ class BankAccountTest {
         assertFalse(BankAccount.isEmailValid("hello..@b.com")); // checks allowed special character in not allowed scenario (must be followed by letter or number)
         assertFalse(BankAccount.isEmailValid("okay#notcool@womp.edu")); // checks not allowed special character
         assertFalse(BankAccount.isEmailValid("everythinggoodhere@.a")); // missing email domain
+        assertFalse(BankAccount.isEmailValid("@gmail.com")); //missing prefix
         
     }
 
