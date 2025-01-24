@@ -25,8 +25,11 @@ class BankAccountTest {
     @Test
     void isEmailValidTest(){
         assertTrue(BankAccount.isEmailValid( "a@b.com"));   // valid email address
-        assertFalse( BankAccount.isEmailValid(""));         // empty string
-
+        assertTrue(BankAccount.isEmailValid("cool_guy@aaa.org")); // checks allowed special character (_)
+        assertFalse(BankAccount.isEmailValid(""));         // empty string
+        assertFalse(BankAccount.isEmailValid("hello..@b.com")); // checks allowed special character in not allowed scenario (must be followed by letter or number)
+        assertFalse(BankAccount.isEmailValid("okay#notcool@womp.edu")); // checks not allowed special character
+        assertFalse(BankAccount.isEmailValid("everythinggoodhere@.a")); // missing email domain
         
     }
 
