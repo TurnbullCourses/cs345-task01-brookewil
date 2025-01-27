@@ -35,6 +35,21 @@ class BankAccountTest {
     }
 
     @Test
+    void isAmountValid(){
+        // List in comments the equivalence classes that are present.
+        // Write individual checks for middle and border cases of each equivalence class
+
+        assertTrue(BankAccount.isAmountValid(0));      // border
+        assertTrue(BankAccount.isAmountValid(4.05));   
+        assertTrue(BankAccount.isAmountValid(7.2));
+
+        assertFalse(BankAccount.isAmountValid(-5.00));
+        assertFalse(BankAccount.isAmountValid(10.098));
+
+    }
+    
+
+    @Test
     void constructorTest() {
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
 
