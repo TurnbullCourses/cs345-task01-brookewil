@@ -60,7 +60,6 @@ class BankAccountTest {
         assertFalse(BankAccount.isAmountValid(10.098));
 
     }
-    
 
     @Test
     void constructorTest() {
