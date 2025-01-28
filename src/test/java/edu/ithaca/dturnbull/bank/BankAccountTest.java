@@ -44,11 +44,12 @@ class BankAccountTest {
         assertFalse(BankAccount.isEmailValid("okay#notcool@womp.edu")); // checks not allowed special character
         assertFalse(BankAccount.isEmailValid("everythinggoodhere@.a")); // missing email domain
         assertFalse(BankAccount.isEmailValid("@gmail.com")); //missing prefix
+        assertFalse(BankAccount.isEmailValid("coolgmail.com")); //missing @
         
     }
 
     @Test
-    void isAmountValid(){
+    void isAmountValidTest(){
         // List in comments the equivalence classes that are present.
         // Write individual checks for middle and border cases of each equivalence class
 
@@ -69,6 +70,30 @@ class BankAccountTest {
         assertEquals(200, bankAccount.getBalance(), 0.001);
         //check for exception thrown correctly
         assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", 100));
+    }
+
+    @Test
+    void transferTest(){
+        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+        BankAccount bankAccount2 = new BankAccount("b@a.com", 200);
+
+        bankAccount.transfer(bankAccount2, 100);
+        assertEquals(100, bankAccount.getBalance(), 0.001);
+        assertEquals(300, bankAccount2.getBalance(), 0.001);
+
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.transfer(bankAccount2, 200));  
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.transfer(bankAccount2, -100));
+    }
+
+    @Test
+    void depositTest(){
+        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+
+        bankAccount.deposit(100);
+        assertEquals(300, bankAccount.getBalance(), 0.001);
+
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(0));  
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-100));
     }
 
 }
