@@ -68,7 +68,7 @@ public class BankAccount {
      * @throws InsufficientFundsException if it is larger than the balance
      * @throws IllegalArgumentException if amount is negative
      */
-    public void transfer(String account, double amount){
+    public void transfer(BankAccount account, double amount){
     }
 
     /**
