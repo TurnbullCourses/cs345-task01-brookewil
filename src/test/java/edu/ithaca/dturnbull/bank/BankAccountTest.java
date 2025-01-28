@@ -9,8 +9,13 @@ class BankAccountTest {
     @Test
     void getBalanceTest() {
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
+        assertEquals(200, bankAccount.getBalance(), 0.001);                  // valid; testing for middle case
 
-        assertEquals(200, bankAccount.getBalance(), 0.001);
+        BankAccount bankAccount2 = new BankAccount("a@b.com", 0);
+        assertEquals(0, bankAccount2.getBalance(), 0.001);                   // valid; testing for no balance
+
+        BankAccount bankAccount3 = new BankAccount("a@b.com", -50);
+        assertEquals(-50, bankAccount3.getBalance(), 0.001);                          // invalid; (can't start with negative balance and can't withdraw into negatives)
     }
 
     @Test
