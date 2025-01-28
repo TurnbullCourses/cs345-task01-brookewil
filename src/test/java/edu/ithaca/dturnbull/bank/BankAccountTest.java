@@ -16,10 +16,18 @@ class BankAccountTest {
     @Test
     void withdrawTest() throws InsufficientFundsException{
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
-        bankAccount.withdraw(100);
 
-        assertEquals(100, bankAccount.getBalance(), 0.001);
-        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300));
+        bankAccount.withdraw(100);
+        assertEquals(100, bankAccount.getBalance(), 0.001);      // valid; testing for middle case
+
+        bankAccount.withdraw(100);
+        assertEquals(0, bankAccount.getBalance(), 0.001);       // valid; edge case (withdraw all money)
+
+        bankAccount.withdraw(0);
+        assertEquals(0, bankAccount.getBalance(), 0.001);       // valid; edge case (withdraw nothing)
+
+        assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300));  // invalid; testing error (withdraw more than in account)
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-100));          // invalid; testing error (withdraw negative amount) 
     }
 
     @Test
