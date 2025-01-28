@@ -62,4 +62,20 @@ public class BankAccount {
         }
         return true;
     }
+
+    /**
+     * @post transfers the specified amount from this account to another account
+     * @throws InsufficientFundsException if it is larger than the balance
+     * @throws IllegalArgumentException if amount is negative
+     */
+    public void transfer(double amount){
+    }
+
+    /**
+     * @post adds to the balance by the specified amount
+     * @throws IllegalArgumentException if amount is negative
+     */
+    public void deposit(double amount){
+        
+    }
 }
