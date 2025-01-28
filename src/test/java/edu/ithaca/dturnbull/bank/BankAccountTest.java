@@ -83,6 +83,7 @@ class BankAccountTest {
 
         assertThrows(IllegalArgumentException.class, () -> bankAccount.transfer(bankAccount2, 200));  
         assertThrows(IllegalArgumentException.class, () -> bankAccount.transfer(bankAccount2, -100));
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.transfer(bankAccount2, 100.001));
     }
 
     @Test
@@ -94,6 +95,7 @@ class BankAccountTest {
 
         assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(0));  
         assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-100));
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(100.001));
     }
 
 }
