@@ -76,6 +76,12 @@ public class BankAccount {
      * @throws IllegalArgumentException if amount is negative
      */
     public void deposit(double amount){
+        if (amount > 0 && BigDecimal.valueOf(amount).scale() < 2){
+            balance += amount;
+        }
+        else {
+            throw new IllegalArgumentException("Amount must be positive");
+        }
         
     }
 }
