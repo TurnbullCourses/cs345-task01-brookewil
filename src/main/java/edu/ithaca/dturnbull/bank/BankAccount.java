@@ -64,14 +64,6 @@ public class BankAccount {
     }
 
     /**
-     * @post transfers the specified amount from this account to another account
-     * @throws InsufficientFundsException if it is larger than the balance
-     * @throws IllegalArgumentException if amount is negative
-     */
-    public void transfer(BankAccount account, double amount){
-    }
-
-    /**
      * @post adds to the balance by the specified amount
      * @throws IllegalArgumentException if amount is negative
      */
@@ -83,5 +75,22 @@ public class BankAccount {
             throw new IllegalArgumentException("Amount must be positive");
         }
         
+    }
+
+    /**
+     * @post transfers the specified amount from this account to another account
+     * @throws InsufficientFundsException if it is larger than the balance
+     * @throws IllegalArgumentException if amount is negative
+     */
+    public void transfer(BankAccount account, double amount) throws InsufficientFundsException{
+        if (amount <= balance){
+            balance -=amount;
+            account.deposit(amount);
+        }
+        else if (amount < 0) {
+            throw new IllegalArgumentException("Amount must be positive");
+        } else {
+            throw new InsufficientFundsException("Not enough money");
+        }
     }
 }
