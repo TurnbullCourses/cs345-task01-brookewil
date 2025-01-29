@@ -73,6 +73,18 @@ class BankAccountTest {
     }
 
     @Test
+    void depositTest(){
+        BankAccount bankAccount = new BankAccount("a@b.com", 200);
+
+        bankAccount.deposit(100);
+        assertEquals(300, bankAccount.getBalance(), 0.001);
+
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(0));  
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-100));
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(100.001));
+    }
+
+    @Test
     void transferTest() throws InsufficientFundsException{
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
         BankAccount bankAccount2 = new BankAccount("b@a.com", 200);
@@ -84,18 +96,6 @@ class BankAccountTest {
         assertThrows(InsufficientFundsException.class, () -> bankAccount.transfer(bankAccount2, 200));  
         assertThrows(IllegalArgumentException.class, () -> bankAccount.transfer(bankAccount2, -100));
         assertThrows(IllegalArgumentException.class, () -> bankAccount.transfer(bankAccount2, 100.001));
-    }
-
-    @Test
-    void depositTest(){
-        BankAccount bankAccount = new BankAccount("a@b.com", 200);
-
-        bankAccount.deposit(100);
-        assertEquals(300, bankAccount.getBalance(), 0.001);
-
-        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(0));  
-        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-100));
-        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(100.001));
     }
 
 }

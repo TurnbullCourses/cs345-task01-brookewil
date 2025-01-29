@@ -83,11 +83,11 @@ public class BankAccount {
      * @throws IllegalArgumentException if amount is negative
      */
     public void transfer(BankAccount account, double amount) throws InsufficientFundsException{
-        if (amount <= balance){
+        if (amount <= balance && BigDecimal.valueOf(amount).scale() < 2){
             balance -=amount;
             account.deposit(amount);
         }
-        else if (amount < 0) {
+        else if (amount < 0 || BigDecimal.valueOf(amount).scale() > 2) {
             throw new IllegalArgumentException("Amount must be positive");
         } else {
             throw new InsufficientFundsException("Not enough money");
